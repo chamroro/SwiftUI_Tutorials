@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LandmarkDetail: View {
+    @EnvironmentObject var modelData: ModelData
     var landmark: Landmark
     
     var body: some View {
@@ -21,9 +22,11 @@ struct LandmarkDetail: View {
                     .padding(.bottom, -130)
                 
                 VStack(alignment: .leading) {
-                    Text(landmark.name)
-                        .font(.title)
-                        .foregroundColor(.black)
+                    HStack {
+                       Text(landmark.name)
+                           .font(.title)
+                       FavoriteButton(isSet: $modelData.landmarks[landmarkIndex].isFavorite)
+                   }
                     HStack {
                         Text(landmark.park)
                             .font(.subheadline)
